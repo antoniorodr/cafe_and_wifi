@@ -46,10 +46,19 @@ def random_cafe():
     result = db.session.execute(db.select(Cafe))
     all_cafes = result.scalars().all()
     random_cafe = random.choice(all_cafes)
-    return jsonify(cafe=random_cafe.to_dict())
+    cafe_random = random_cafe.to_dict()
+    return render_template("random.html", cafe = cafe_random)
 
 @app.route("/all")
 def all_cafe():
+    result = db.session.execute(db.select(Cafe).order_by(Cafe.name))
+    all_cafes = result.scalars().all()
+    cafes_list = [cafe.to_dict() for cafe in all_cafes]
+    cafes_json = jsonify(cafes=[cafe.to_dict() for cafe in all_cafes])
+    return render_template("cafes.html", cafes=cafes_list, cafes_json = cafes_json)
+
+@app.route("/cafes_json")
+def cafes_json():
     result = db.session.execute(db.select(Cafe).order_by(Cafe.name))
     all_cafes = result.scalars().all()
     return jsonify(cafes=[cafe.to_dict() for cafe in all_cafes])
