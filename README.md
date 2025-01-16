@@ -48,13 +48,13 @@
 
 Flask-based API TEST that provides a simple interface for managing a database of cafes. It allows users to perform various operations, including retrieving details about all cafes, getting a random cafe suggestion, searching for cafes by location, adding new cafes and updating specific cafe information.
 
-The website can visits here: https://cafe-and-wifi.vercel.app
+The website can be visited here: https://cafe-and-wifi.vercel.app
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: Get information about cafes
-:heavy_check_mark: Update the information
-:heavy_check_mark: Search for a specific cafe
+:heavy_check_mark: Get information about cafes;\
+:heavy_check_mark: Update the information;\
+:heavy_check_mark: Search for a specific cafe;
 
 ## :rocket: Technologies ##
 
@@ -65,7 +65,7 @@ The following tools were used in this project:
 
 ## :white_check_mark: Requirements ##
 
-Before starting :checkered_flag:, you need to have - [Flask SQLAlchemy](https://flask-sqlalchemy.readthedocs.io/en/stable/) and - [Flask Bootstrap](https://pythonhosted.org/Flask-Bootstrap/) installed. Use the requirements.txt.
+Before starting :checkered_flag:, you need to have [Flask SQLAlchemy](https://flask-sqlalchemy.readthedocs.io/en/stable/) and [Flask Bootstrap](https://pythonhosted.org/Flask-Bootstrap/) installed. Use the requirements.txt to install them along with the another modules.
 
 ## :checkered_flag: Starting ##
 
