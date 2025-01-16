@@ -46,15 +46,15 @@
 
 ## :dart: About ##
 
-Flask-based API that provides a simple interface for managing a database of cafes. It allows users to perform various operations, including retrieving details about all cafes, getting a random cafe suggestion, searching for cafes by location, adding new cafes and updating specific cafe information.
+Flask-based API TEST that provides a simple interface for managing a database of cafes. It allows users to perform various operations, including retrieving details about all cafes, getting a random cafe suggestion, searching for cafes by location, adding new cafes and updating specific cafe information.
 
-The website can visits here:
+The website can visits here: https://cafe-and-wifi.vercel.app
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
+:heavy_check_mark: Get information about cafes
+:heavy_check_mark: Update the information
+:heavy_check_mark: Search for a specific cafe
 
 ## :rocket: Technologies ##
 
@@ -72,17 +72,6 @@ Before starting :checkered_flag:, you need to have - [Flask SQLAlchemy](https://
 ```bash
 # Clone this project
 $ git clone https://github.com/antoniorodr/wifi_cafe
-
-# Access
-$ cd wifi_cafe
-
-# Install dependencies
-$ yarn
-
-# Run the project
-$ yarn start
-
-# The server will initialize in the <http://localhost:3000>
 ```
 
 ## :memo: License ##
