@@ -7,7 +7,6 @@ import random
 import os
 
 app = Flask(__name__)
-
 class Base(DeclarativeBase):
     pass
 
@@ -15,7 +14,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cafes.db'
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 Bootstrap5(app)
-
 
 class Cafe(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -103,7 +101,6 @@ def update(cafe_id):
 def delete(cafe_id):
     cafe_to_delete = db.session.get(Cafe, cafe_id)
     api_key = request.headers.get("api-key")
-    print("Headers received:", request.headers)
     if cafe_to_delete is None:
         return jsonify(error={"Not Found": "Sorry, a cafe with that ID was not found in the database."}), 404
     if api_key != os.environ["api-key"]:
