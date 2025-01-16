@@ -9,19 +9,19 @@
 <h1 align="center">Cafe and wifi</h1>
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/antoniorodr/wifi_cafe?color=56BEB8">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/antoniorodr/cafe_and_wifi?color=56BEB8">
 
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/antoniorodr/wifi_cafe?color=56BEB8">
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/antoniorodr/cafe_and_wifi?color=56BEB8">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/antoniorodr/wifi_cafe?color=56BEB8">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/antoniorodr/cafe_and_wifi?color=56BEB8">
 
-  <img alt="License" src="https://img.shields.io/github/license/antoniorodr/wifi_cafe?color=56BEB8">
+  <img alt="License" src="https://img.shields.io/github/license/antoniorodr/cafe_and_wifi?color=56BEB8">
 
-  <img alt="Github issues" src="https://img.shields.io/github/issues/antoniorodr/wifi_cafe?color=56BEB8" />
+  <img alt="Github issues" src="https://img.shields.io/github/issues/antoniorodr/cafe_and_wifi?color=56BEB8" />
 
-  <img alt="Github forks" src="https://img.shields.io/github/forks/antoniorodr/wifi_cafe?color=56BEB8" />
+  <img alt="Github forks" src="https://img.shields.io/github/forks/antoniorodr/cafe_and_wifi?color=56BEB8" />
 
-  <img alt="Github stars" src="https://img.shields.io/github/stars/antoniorodr/wifi_cafe?color=56BEB8" />
+  <img alt="Github stars" src="https://img.shields.io/github/stars/antoniorodr/cafe_and_wifi?color=56BEB8" />
 </p>
 
 <!-- Status -->
