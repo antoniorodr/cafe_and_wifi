@@ -4,6 +4,7 @@ from flask_bootstrap import Bootstrap5
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean
 import random
+import os
 
 app = Flask(__name__)
 
@@ -32,15 +33,12 @@ class Cafe(db.Model):
     def to_dict(self):
         return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
-
 with app.app_context():
     db.create_all()
-
 
 @app.route("/")
 def home():
     return render_template("index.html")
-
 
 @app.route("/random")
 def random_cafe():
@@ -101,16 +99,19 @@ def update(cafe_id):
     else:
         return jsonify(error={"Not Found": "Sorry, a cafe with that ID was not found in the database."}), 404
 
-# @app.route("/delete/<cafe_id>", methods=["DELETE"])
-# def delete(cafe_id):
-#     api_key = request.headers.get("api_key")
-#     result = db.get_or_404(Cafe, cafe_id)
-#     if api_key != "TopSecretAPIKey":
-#         return jsonify({"Error": "Sorry, that's not allowed. Make sure you have the right api_key."}), 403
-#     with app.app_context():
-#         db.session.delete(result)
-#         db.session.commit()
-#     return jsonify({"success": "The cafe with the id indicated has been deleted."}), 200
+@app.route("/delete/<cafe_id>", methods=["DELETE"])
+def delete(cafe_id):
+    cafe_to_delete = db.session.get(Cafe, cafe_id)
+    api_key = request.headers.get("api-key")
+    print("Headers received:", request.headers)
+    if cafe_to_delete is None:
+        return jsonify(error={"Not Found": "Sorry, a cafe with that ID was not found in the database."}), 404
+    if api_key != os.environ["api-key"]:
+        return jsonify({"Error": "Sorry, that's not allowed. Make sure you have the right api_key."}), 403
+    else:
+        db.session.delete(cafe_to_delete)
+        db.session.commit()
+        return jsonify({"success": "The cafe with the id indicated has been deleted."}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
