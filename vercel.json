@@ -3,7 +3,7 @@
     "builds": [
         {
             "src": "*.py",
-            "use": "@liudonghua123/now-flask"
+            "use": "@antoniorodr/cafe_and_wifi"
         }
     ],
     "routes": [
