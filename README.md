@@ -52,9 +52,9 @@ The website can be visited here: https://cafe-and-wifi.vercel.app
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: Get information about cafes;\
-:heavy_check_mark: Update the information;\
-:heavy_check_mark: Search for a specific cafe;
+:heavy_check_mark: Get information about cafes\
+:heavy_check_mark: Update the information\
+:heavy_check_mark: Search for a specific cafe
 
 ## :rocket: Technologies ##
 
