@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 class Base(DeclarativeBase):
     pass
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cafes.db'
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
@@ -46,19 +47,10 @@ def random_cafe():
     result = db.session.execute(db.select(Cafe))
     all_cafes = result.scalars().all()
     random_cafe = random.choice(all_cafes)
-    cafe_random = random_cafe.to_dict()
-    return render_template("random.html", cafe = cafe_random)
+    return jsonify(cafe=random_cafe.to_dict())
 
 @app.route("/all")
 def all_cafe():
-    result = db.session.execute(db.select(Cafe).order_by(Cafe.name))
-    all_cafes = result.scalars().all()
-    cafes_list = [cafe.to_dict() for cafe in all_cafes]
-    cafes_json = jsonify(cafes=[cafe.to_dict() for cafe in all_cafes])
-    return render_template("cafes.html", cafes=cafes_list, cafes_json = cafes_json)
-
-@app.route("/cafes_json")
-def cafes_json():
     result = db.session.execute(db.select(Cafe).order_by(Cafe.name))
     all_cafes = result.scalars().all()
     return jsonify(cafes=[cafe.to_dict() for cafe in all_cafes])
@@ -75,23 +67,30 @@ def search_cafe():
 
 @app.route("/add", methods = ["POST"])
 def new_cafe():
+    name = request.form.get("name")
+    existing_cafe = db.session.query(Cafe).filter_by(name=name).first()
+    if existing_cafe:
+        return jsonify(error={"message": "A cafe with this name already exists."}), 400
+
     new_cafe = Cafe(
-        name=request.form.get("name"),
+        name=name,
         map_url=request.form.get("map_url"),
         img_url=request.form.get("img_url"),
         location=request.form.get("location"),
-        has_sockets=bool(request.form.get("sockets")),
-        has_toilet=bool(request.form.get("toilet")),
-        has_wifi=bool(request.form.get("wifi")),
-        can_take_calls=bool(request.form.get("calls")),
+        has_sockets=request.form.get("sockets") == 'True',
+        has_toilet=request.form.get("toilet") == 'True',
+        has_wifi=request.form.get("wifi") == 'True',
+        can_take_calls=request.form.get("calls") == 'True',
         seats=request.form.get("seats"),
         coffee_price=request.form.get("coffee_price"),
     )
+
     db.session.add(new_cafe)
     db.session.commit()
     return jsonify(response={"success": "Successfully added the new cafe."})
 
-@app.route("/update/<cafe_id>", methods = ["PATCH", "GET"])
+
+@app.route("/update/<cafe_id>", methods = ["PATCH"])
 def update(cafe_id):
     new_price = request.args.get("coffee_price")
     result = db.get_or_404(Cafe, cafe_id)
@@ -102,21 +101,16 @@ def update(cafe_id):
     else:
         return jsonify(error={"Not Found": "Sorry, a cafe with that ID was not found in the database."}), 404
 
-@app.route("/delete/<cafe_id>", methods = ["DELETE"])
-def delete(cafe_id):
-    api_key = request.args.get("api_key")
-    result = db.get_or_404(Cafe, cafe_id)
-    if api_key == "TopSecretAPIKey":
-        if not result:
-            return jsonify(error={"Not Found": "Sorry, a cafe with that ID was not found in the database."}), 404
-        else:
-            with app.app_context():
-                cafe_to_delete = db.get_or_404(Cafe, cafe_id)  
-                db.session.delete(cafe_to_delete)
-                db.session.commit()
-                return jsonify({"success": "The cafe with the id indicated has been deleted."}), 200
-    else:
-        return jsonify({"Error": "Sorry, thats not allowed. Make sure you have the right api_key."}), 403
+# @app.route("/delete/<cafe_id>", methods=["DELETE"])
+# def delete(cafe_id):
+#     api_key = request.headers.get("api_key")
+#     result = db.get_or_404(Cafe, cafe_id)
+#     if api_key != "TopSecretAPIKey":
+#         return jsonify({"Error": "Sorry, that's not allowed. Make sure you have the right api_key."}), 403
+#     with app.app_context():
+#         db.session.delete(result)
+#         db.session.commit()
+#     return jsonify({"success": "The cafe with the id indicated has been deleted."}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
